@@ -34,12 +34,15 @@ const SMSVerificationCode = ({phoneNum}) => {
 
             })
 
+
             let approval_status = await response.json()
 
-            if(approval_status.approval) {
-              // start onboarding
+            console.log(approval_status)
+
+            if(approval_status.approval === "approved") {
+                console.log('approved  lets setup stuff')
             } else {
-              //something else happens here
+                console.log('not approved, what to do now...')
             }
   }
 
