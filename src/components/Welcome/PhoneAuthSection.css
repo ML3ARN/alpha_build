@@ -1,0 +1,91 @@
+.PhoneAuthSectionContainer {
+	height:  100vh;
+	position: relative;
+	background-color:  white;
+}
+
+.PhoneAuthSection {
+	position:  absolute;
+	top:  50%;
+	transform: translateY(-50%);
+	justify-content: center;
+	background:  white;
+	width:  50vw;
+}
+
+#PhoneAuthSectionBanner {
+	
+	font-size:  64px;
+	font-weight:  bold;
+	font-style: normal;
+	line-height: 120%;
+	color: #2132E6 ;
+	font-family: Antonio;
+	/*border:  1px solid black;*/
+	text-align: center;
+}
+
+#PhoneAuthSectionText {
+	text-align: center;
+	/*border: 1px solid green;*/
+	width:  500px;
+	font-family:  Roboto;
+	font-style: normal;
+	font-size:  18px;
+}
+
+.VerificationInputsContainer {
+	display: flex;
+	border: 1px solid green;
+
+}
+
+.verificationInput {
+	height:  40px;
+	margin:  20px;
+	padding:  10px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	text-align: center;
+	font-size: 12px;
+	font-weight: strong;
+}
+
+
+.DisclaimerText {
+	font-family: Roboto;
+	font-weight: 400;
+	font-size:  12px;
+	line-height: 14.4px;
+	margin-top: 25px;
+}
+
+
+.AuthClickthroughButton {
+	height:  57px;
+	width:  471.5px;
+	background-color: #2131E6;
+	border-radius:  5px;
+	border: 2px solid #2131E6;
+	font-family:  Roboto Condensed;
+	font-style:  normal;
+	font-weight:  bold;
+	font-size:  18px;
+	color:  #FFFFFF;
+}
+
+.AuthClickthroughButtonWhite {
+
+	height:  57px;
+	width:  471.5px;
+	background-color: #FFFFFF;
+	border-radius:  5px;
+	border: 2px solid #2131E6;
+	font-family:  Roboto Condensed;
+	font-style:  normal;
+	font-weight:  bold;
+	font-size:  18px;
+	color:  #2132E6;
+
+}
