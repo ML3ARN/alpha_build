@@ -37,10 +37,10 @@ const SMSVerificationCode = ({phoneNum}) => {
 
             let approval_status = await response.json()
 
-            console.log(approval_status)
 
             if(approval_status.approval === "approved") {
-                console.log('approved  lets setup stuff')
+                localStorage.setItem("sess_id", approval_status.sess_id)
+                history.push("/onboarding")
             } else {
                 console.log('not approved, what to do now...')
             }
