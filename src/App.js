@@ -6,12 +6,31 @@ import {
 
 import Welcome from './components/Welcome/Welcome'
 import { OnboardingContainer } from './components/Onboarding/Onboarding'
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+
+
+
+
+const useStyles = makeStyles({
+  mainContainer : {
+    height: "100vh",
+    flexDirection: "column",
+    padding: "0px",
+    maxWidth: "100vw",
+    display: "flex"
+  }
+})
+
 
 
 const App = () => {
+
+  const classes = useStyles()
   return (
+    <Container className={classes.mainContainer}>
     <Router>
-    <div className="App">
+    
       <Switch>
        
       <Route exact path="/">
@@ -21,11 +40,11 @@ const App = () => {
       <Route exact path="/onboarding">
         <OnboardingContainer />
       </Route>
-      
 
       </Switch>
-       </div>
+       
     </Router>
+    </Container>
   );
 }
 
