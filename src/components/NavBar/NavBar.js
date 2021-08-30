@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 const useStyles = makeStyles({
 	iconArea : {
 		background: "#2132E6",
-		minHeight : "64px"
+		minHeight : "6vh"
 	},
 	toolbar : {
 		background: "#FFFFFF"

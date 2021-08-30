@@ -9,7 +9,7 @@ import { OnboardingContainer } from './components/Onboarding/Onboarding'
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import CollapsedProfile from './components/StudentProfile/CollapsedProfile'
-
+import StudentProfile from './components/StudentProfile/StudentProfile'
 
 
 
@@ -45,6 +45,12 @@ const App = () => {
        <Route exact path="/collapsed_profile">
         <CollapsedProfile />
       </Route>
+
+
+      <Route exact path="/student_profile">
+        <StudentProfile />
+      </Route>
+
 
       </Switch>
        
