@@ -5,13 +5,18 @@ import { Container } from '@material-ui/core';
 import fake_modal_bg from "./fake_modal_background.svg"
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   useRouteMatch,
   useHistory,
   Link,
   useParams
 } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
+import { Chip } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 const useStyles = makeStyles({
 	OnboardingSection : {
@@ -108,7 +113,94 @@ const useStyles = makeStyles({
 		borderRadius : "8px",
 		margin: "20px",
 		fontSize: "18px"
+	},
+	OBLocationSection : {
+		border: "1px solid white",
+		background: "#FFFFFF",
+		padding: "20px",
+		borderRadius: "8px",
+		height: "600px",
+		width: "900px;",
+		top: "50%",
+		left: "50%",
+		margin: "228px 0 0 523px",
+		// display: "flex"
+		fontStyle: "Antonio",
+		fontWeight: "700",
+		fontSize: "30px",
+	},
+	locationTextField : {
+		width : "500px"
+	},
+	OBSkillsSection : {
+				border: "1px solid white",
+		background: "#FFFFFF",
+		padding: "20px",
+		borderRadius: "8px",
+		height: "600px",
+		width: "900px;",
+		top: "50%",
+		left: "50%",
+		margin: "228px 0 0 523px",
+		display: "flex"
+	},
+	OBSkillsLeft : {
+		background : "#DEED60",
+		margin: "10px",
+		flexBasis: "40%",
+		borderRadius: "10px",
+		textAlign: "center",
+		fontStyle: "Antonio",
+		// lineHeight : "68px",
+		fontWeight: "700",
+		fontSize: "30px",
+		wordWrap: "normal",
+		paddingTop: "60px"
+	},
+	OBSkillsRight : {
+		margin: "10px",
+		flexBasis: "60%",
+	
+		borderRadius: "10px"
+	},
+	HFCChip : {
+		border: "1px solid #D2D5E1",
+		boxSizing: "border-box",
+		borderRadius: "52px",
+		display: "inline",
+		padding: "6px 9px",
+	},
+	HFCChipPlus : {
+		borderRadius: "50px",
+		display: "inline",
+		border : "1px solid"
+	},
+	OBinterestsSection : {
+					border: "1px solid white",
+		background: "#FFFFFF",
+		padding: "20px",
+		borderRadius: "8px",
+		height: "600px",
+		width: "900px;",
+		top: "50%",
+		left: "50%",
+		margin: "228px 0 0 523px",
+		display: "flex",
+		color: "#2132E6",
+		flexDirection: "column"
+		
+	},
+	OBinterestsSectionHeader : {
+		fontSize: "62px",
+		fontWeight: "bold",
+		fontFamily: "Antonio"
 
+	},
+	OBinterestsSectionText : {
+		fontFamily: "Roboto",
+		color: "#000000",
+		fontSize: "18px",
+		margin: "20px"
 	}
 
 })
@@ -130,27 +222,54 @@ const OnboardingContainer = () => {
 
 const OnboardingSection = (props) => {
 	const classes = useStyles()
-	let [onBoardingStage, setonBoardingStage] = useState(false)
+	let [onBoardingStage, setonBoardingStage] = useState("ob_start")
+	const history = useHistory()
 
 	console.log(onBoardingStage)
 
 		const ShowResumeUpload = () => {
-				setonBoardingStage(true)
+				setonBoardingStage("resume_upload")
 		}
+
+		const showLocationSection = () => {
+				setonBoardingStage("show_location")
+		}
+
+		const showInterestsSection = () => {
+				setonBoardingStage("show_interest")
+		}
+
+		const showSkillsSection = () => {
+				setonBoardingStage("show_skills")
+		}
+
+		const CompleteOnBoarding = () => {
+				history.push('/collapsed_profile')
+		}
+
 
 	let OBSection
 
-		if(onBoardingStage === false) {
-			 OBSection = (<OBStartSection ShowResumeUpload={ShowResumeUpload} />)
-		} else {
-			 OBSection = (
-			 	<>
-				 	<ResumeUploadSection />
-				 	<center><button className={classes.NextButton}><b>NEXT</b></button></center>
-			 	</>
-			 	)
-		}
 
+		switch (onBoardingStage) {
+			case "resume_upload":
+				OBSection =  (<><ResumeUploadSection showLocationSection={showLocationSection} /></>)
+				break;
+			case "show_location":
+				OBSection = (<OBLocationSection showSkillsSection={showSkillsSection} />)
+				break;
+			case "ob_start":
+				OBSection = (<OBStartSection ShowResumeUpload={ShowResumeUpload} />)
+				break;
+			case "show_skills":
+				OBSection = (<OBSkillsSection showInterestsSection={showInterestsSection} />)
+				break;
+			case "show_interest":
+				OBSection = (<OBInterestsSection CompleteOnBoarding={CompleteOnBoarding} />)
+				break;
+
+
+		}
 
 	return (
 				<Container className={classes.OnboardingSection}>
@@ -164,7 +283,7 @@ const OnboardingSection = (props) => {
 
 const OBStartSection = (props) => {
 	const {url, path} = useRouteMatch()
-	console.log(`url : ${url}`)
+	// console.log(`url : ${url}`)
 	const classes = useStyles()
 	return (
 		/* class is named fakeModal because the figma calls it a modfal when it is not*/
@@ -186,9 +305,10 @@ const OBStartSection = (props) => {
 }
 
 
-const ResumeUploadSection = () => {
+const ResumeUploadSection = (props) => {
 	const classes = useStyles()
 	return (
+		<>
 			<div className={classes.resumeUploadSection}>
 				<div className={classes.ResumeUploadLeft}>
 					<h2>UPLOAD YOUR RESUME</h2>
@@ -198,19 +318,106 @@ const ResumeUploadSection = () => {
 				</div>
 				<div className={classes.ResumeUploadRight}></div>
 			</div>
+			<center><button className={classes.NextButton} onClick={() => props.showLocationSection()}><b>NEXT</b></button></center>
+			</>
 		)
 }
 
 
-// const OBStatus = () => {
-// 	let { OBStatus } = useParams();
+
+const OBLocationSection = (props) => {
+	const classes = useStyles()
+	return (
+		<>
+			<div className={classes.OBLocationSection}>
+				<h1>WHERE ARE YOU BASED?</h1>
+				    <TextField
+				          id="outlined-helperText"
+				          label="What city are you based in?"
+				          defaultValue=""
+				          // helperText="Some important text"
+				          variant="outlined"
+				          className={classes.locationTextField}
+        						/><br />
+        						   ARE YOU OPEN TO IN-PERSON WORK?><br />
+        						   <Switch color="default"/>		
+			</div>
+			<center><button className={classes.NextButton} onClick={() => props.showSkillsSection()}><b>NEXT</b></button></center>
+			</>
+		)
+}
+
+const OBSkillsSection = (props) => {
+	const classes = useStyles()
+	return (
+		<>
+			<div className={classes.OBSkillsSection}>
+					<div className={classes.OBSkillsLeft}>
+						<h2>SELECT UP TO 4 SKILLS</h2>
+						<span>What are you most proud of?</span>
+					</div>
+					<div className={classes.OBSkillsRight}>
+						      <Chip
+						        label="Accounting"				        
+						      />
+					</div>
+			</div>
+			<center><button className={classes.NextButton} onClick={() => props.showInterestsSection()}><b>NEXT</b></button></center>
+			</>
+		)
+}
+
+const OBInterestsSection = (props) => {
+	const classes = useStyles()
+	return (
+		<>
+			<div className={classes.OBinterestsSection}>
+					<div className={classes.OBinterestsSectionHeader} >WHAT ARE<br />
+					YOUR PASSIONS?</div><br />
+					<div className={classes.OBinterestsSectionText}>What gets you up at in the morning?</div>
+					<Select
+				          // labelId="demo-controlled-open-select-label"
+				          // id="demo-controlled-open-select"
+				          // open={open}
+				          // onClose={handleClose}
+				          // onOpen={handleOpen}
+				          value={"Interests"}
+				          // onChange={handleChange}
+	        >
+	        </Select>
+			</div>
+			<center><button className={classes.NextButton} onClick={() => props.CompleteOnBoarding()}><b>NEXT</b></button></center>
+		</>
+		)
+}
+
+
+
+// chip branded per Figma design file
+// const HFCCHip = ({chipValue}) => {
+// 	const classes = useStyles()
 // 	return (
-// 			<div>
-// 				{OBStatus}
+// 			<div className={classes.HFCChip}>
+// 				{chipValue} <div className={classes.HFCChipPlus}>+</div>
 // 			</div>
 // 		)
-// } 
+// }
+
+
+
+
+
+
+
+
+
 
 export {OnboardingContainer}
+
+
+
+
+
+
 
 
